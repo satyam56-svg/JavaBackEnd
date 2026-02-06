@@ -1,0 +1,5 @@
+java(Test.java) -> compilation(javac)(bytecode)(platform independent)-> interpretation(jvm)(machine code)(platform dependent)
+
+// Streams in java
+1. byte stream = input stream, output stream
+2. character stream = reader, writer
