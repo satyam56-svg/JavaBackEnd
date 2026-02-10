@@ -1,0 +1,196 @@
+👉 CPU = Brain
+👉 Core = CPU ka worker
+👉 Process = Running program
+👉 Thread = Process ke andar task
+👉 Multitasking = Multiple kaam ek saath
+
+✅ How JVM Handles Multithreading?
+👉 JVM threads create karta hai
+👉 OS unko CPU pe schedule karta hai
+👉 Threads memory share karte hain
+👉 JVM synchronization tools deta hai
+
+✅ 2 Ways to Create Threads in Java
+🔥 1. Extending Thread Class
+class MyThread extends Thread {
+
+    public void run() {
+        System.out.println("Thread running...");
+    }
+
+    public static void main(String[] args) {
+        MyThread t = new MyThread();
+        t.start();   // thread start
+    }
+}
+👍 Pros:
+Simple syntax
+Easy for beginners
+👎 Cons:
+Java multiple inheritance allow nahi karta
+Agar already kisi class ko extend kar rahe ho toh problem.
+
+🔥 2. Implementing Runnable Interface (Best Practice)
+class MyThread implements Runnable {
+
+    public void run() {
+        System.out.println("Thread running...");
+    }
+
+    public static void main(String[] args) {
+        MyThread obj = new MyThread();
+        Thread t = new Thread(obj);
+        t.start();
+    }
+}
+👍 Pros:
+Flexible
+Better design
+Multiple inheritance issue nahi.
+
+⚡ Ultra simple analogy
+👉 Thread class = Driver + Car
+👉 Runnable = Sirf driver, car alag se deni padegi.
+
+Java Thread LifeCycle..
+NEW
+  |
+start()
+  |
+RUNNABLE <--> RUNNING
+  |
+WAITING / BLOCKED
+  |
+TERMINATED
+
+Admission liya → NEW
+Class ke liye ready → RUNNABLE
+Class attend → RUNNING
+Break me wait → WAITING
+Course complete → TERMINATED
+
+// Master Java threads: Essential method..
+| Method          | Use                     |
+| --------------- | ----------------------- |
+| start()         | Thread start            |
+| run()           | Task define             |
+| sleep()         | Pause                   |
+| join()          | Wait for another thread |
+| yield()         | CPU give chance         |
+| isAlive()       | Check running           |
+| setPriority()   | Priority set            |
+| currentThread() | Current thread          |
+
+⚡ Real-Life Analogy
+👉 Workers (threads):
+start() → kaam shuru
+sleep() → break
+join() → kisi ka wait
+yield() → dusre ko chance
+
+✅ Synchronization kya hota hai ?
+👉 Jab multiple threads same resource (data/object) ko access karte hain, toh problem ho sakti hai.
+Example:
+2 threads ek variable increment kar rahe hain.
+Result galat aa sakta hai.
+Is problem ko bolte hain:
+🔥 Race Condition
+
+🔥 synchronized keyword
+Java me synchronized use karke critical section lock karte hain.
+1️⃣ Synchronized Method
+class Test {
+
+    synchronized void increment() {
+        count++;
+    }
+}
+👉 Ek time pe sirf ek thread method execute karega.
+2️⃣ Synchronized Block
+void increment() {
+    synchronized(this) {
+        count++;
+    }
+}
+👉 Specific code block lock.
+Better performance.
+🔥 Lock kaise kaam karta hai?
+👉 Har object ke paas monitor lock hota hai.
+Thread lock le leta hai.
+Dusre threads wait karte hain.
+🚀 Real Life Example
+👉 Bathroom example 😄
+Ek hi bathroom (shared resource)
+Ek time pe ek banda.
+
+# ✅ 1. ReentrantLock (Java Locks)
+👉 `ReentrantLock` ek advanced locking mechanism hai (synchronized se powerful).
+### Features:
+✅ Manual lock/unlock
+✅ Try lock without waiting
+✅ Fairness option
+✅ More control
+Example:
+Lock lock = new ReentrantLock();
+lock.lock();
+try {
+   // critical section
+} finally {
+   lock.unlock();
+}
+👉 Always unlock in finally.
+
+# ✅ 2. Lock Fairness
+👉 Fair lock = threads ko order me chance milta hai (FIFO).
+Example:
+* Thread A wait kar raha
+* Thread B baad me aaya
+Fair lock → A pehle execute karega.
+Lock lock = new ReentrantLock(true); // fair
+
+# ✅ 3. ReadWriteLock
+👉 Jab multiple read operations ho aur kam write.
+Concept:
+✅ Multiple readers allowed
+❌ Writer exclusive hota hai.
+Example:
+ReadWriteLock rw = new ReentrantReadWriteLock();
+rw.readLock().lock();
+rw.writeLock().lock();
+Use:
+* Database
+* Cache systems
+
+# ✅ 4. Deadlock
+👉 Jab 2 threads ek dusre ka lock wait karte hain → program freeze.
+Example:
+Thread 1 → Lock A then B
+Thread 2 → Lock B then A
+👉 Dono wait forever.
+Solution:
+* Same lock order
+* TryLock
+
+# ✅ 5. Thread Communication
+👉 Threads ek dusre se baat karte hain.
+Methods:
+✅ wait()
+✅ notify()
+✅ notifyAll()
+Example:
+Producer-consumer problem.
+
+# ✅ 6. Thread Safety
+👉 Code safe hai jab multiple threads se data corrupt na ho.
+Methods:
+* synchronized
+* Locks
+* Atomic classes
+
+# 🚀 Ultra Simple Summary
+👉 ReentrantLock = advanced synchronized
+👉 Fairness = order maintain
+👉 ReadWriteLock = multiple read allowed
+👉 Deadlock = threads stuck waiting
+👉 Thread communication = wait/notify
+👉 Thread safety = data safe
