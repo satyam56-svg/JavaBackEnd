@@ -1,0 +1,181 @@
+**Java 8 – Purpose and Important Features**
+
+**1. Purpose of Java 8**
+Java 8 ek major update tha Java ka. Iska main purpose tha:
+* Code ko short aur readable banana
+* Functional programming concepts introduce karna
+* Performance improve karna
+* Multithreading aur collection handling easy banana
+Java 8 se pehle zyada boilerplate code likhna padta tha, Java 8 ne lambda expressions jaise features se coding simple kar di.
+
+**2. Important Features of Java 8**
+Main features:
+* Lambda Expressions
+* Functional Interfaces
+* Stream API
+* Default Methods in Interface
+* Method References
+* Optional Class
+* New Date and Time API
+
+**3. Lambda Expression**
+Lambda expression ek short syntax hai jo function jaisa behaviour provide karta hai bina full class banaye.
+Syntax:
+(parameters) -> { body }
+Example:
+(a, b) -> a + b
+Benefits:
+* Code short hota hai
+* Readability improve hoti hai
+* Functional programming support milta hai
+
+**4. Functional Interface**
+Functional Interface ek aisi interface hoti hai jisme sirf ek abstract method hota hai.
+Example:
+interface MyInterface {
+void show();
+}
+Lambda expression functional interface ko implement karne ke liye use hota hai.
+Example:
+MyInterface obj = () -> System.out.println("Hello");
+obj.show();
+
+**Relation between Functional Interface and Lambda**
+* Functional Interface structure provide karta hai.
+* Lambda Expression uska implementation deta hai.
+**Inheritance in Functional Interface**
+Functional Interface bhi inheritance support karti hai.
+Rules:
+* Functional interface ek hi abstract method allow karti hai.
+* Agar ek functional interface kisi dusri interface ko extend kare, to total abstract methods sirf ek hi hone chahiye.
+* Agar multiple abstract methods ho gaye to wo functional interface nahi rahegi.
+Example:
+interface A {
+void show();
+}
+
+interface B extends A {
+// no extra abstract method
+}
+
+**Default Methods in Interface (Java 8)**
+Java 8 se pehle interface me sirf abstract methods hote the.
+Java 8 me default keyword introduce hua:
+* Interface me method body likh sakte hain.
+* Classes ko force nahi karta override karne ke liye.
+
+Syntax:
+default void display() {
+System.out.println("Default Method");
+}
+Example:
+interface Test {
+default void show() {
+System.out.println("Hello");
+}
+}
+
+**Static Methods in Interface**
+Java 8 me interface ke andar static methods bhi allowed hain.
+Features:
+* Static method directly interface se call hota hai.
+* Object se call nahi kar sakte.
+Example:
+interface Demo {
+static void show() {
+System.out.println("Static method");
+}
+}
+Call:
+Demo.show();
+
+**How to use Lambda Expression**
+Lambda expression short way hai functional interface implement karne ka.
+Steps:
+1. Functional interface create karo.
+2. Lambda syntax use karke implementation do.
+Example:
+interface MyInterface {
+void display();
+}
+public class Main {
+public static void main(String[] args) {
+MyInterface obj = () -> System.out.println("Hello Lambda");
+obj.display();
+}
+}
+
+**How to create Thread using Java**
+Java me thread create karne ke mainly 2 tarike hain:
+1. Thread class ko extend karke
+2. Runnable interface implement karke
+
+**1. Extending Thread Class**
+Example:
+class MyThread extends Thread {
+public void run() {
+System.out.println("Thread running");
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+MyThread t = new MyThread();
+t.start();
+}
+}
+
+**2. Implementing Runnable Interface (Recommended)**
+Example:
+class MyRunnable implements Runnable {
+public void run() {
+System.out.println("Thread running");
+}
+}
+
+public class Main {
+public static void main(String[] args) {
+Thread t = new Thread(new MyRunnable());
+t.start();
+}
+}
+
+**How to use Comparator in Java**
+Comparator ek interface hai jo custom sorting ke liye use hota hai.
+Method:
+int compare(Object o1, Object o2)
+Example:
+import java.util.*;
+class Main {
+public static void main(String[] args) {
+    List<Integer> list = Arrays.asList(5,2,8,1);
+    Collections.sort(list, (a,b) -> a - b);
+    System.out.println(list);
+}
+}
+
+**Difference between Lambda Expression and Anonymous Class**
+Lambda Expression:
+* Short syntax
+* Less code
+* Functional interface ke liye use hota hai
+* Readable
+Anonymous Class:
+* Full class structure
+* Zyada boilerplate code
+* Older approach
+
+**Mastering Java 8 Predicates**
+Predicate ek functional interface hai jo boolean return karta hai.
+Package:
+java.util.function.Predicate
+Method:
+boolean test(T t)
+Example:
+import java.util.function.Predicate;
+public class Main {
+public static void main(String[] args) {
+    Predicate<Integer> check = x -> x > 10;
+    System.out.println(check.test(15)); // true
+}
+}
