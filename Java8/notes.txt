@@ -179,3 +179,89 @@ public static void main(String[] args) {
     System.out.println(check.test(15)); // true
 }
 }
+
+**Java 8 Functional Interfaces (Built-in)**
+Java 8 me java.util.function package me ready-made functional interfaces diye gaye hain.
+Main interfaces:
+* Predicate
+* Function
+* Consumer
+* Supplier
+
+**Consumer Interface**
+Consumer data ko accept karta hai but kuch return nahi karta.
+Method:
+void accept(T t)
+Example:
+import java.util.function.Consumer;
+Consumer<String> c = x -> System.out.println(x);
+c.accept("Hello");
+
+**Supplier Interface**
+Supplier koi input nahi leta but output return karta hai.
+Method:
+T get()
+Example:
+import java.util.function.Supplier;
+Supplier<Integer> s = () -> 10;
+System.out.println(s.get());
+
+**BiPredicate, BiFunction, BiConsumer**
+Bi matlab 2 inputs.
+BiPredicate:
+boolean test(T t, U u)
+BiFunction:
+R apply(T t, U u)
+BiConsumer:
+void accept(T t, U u)
+Example:
+BiFunction<Integer,Integer,Integer> add = (a,b) -> a+b;
+
+**UnaryOperator and BinaryOperator**
+UnaryOperator:
+* Ek input
+* Same type output
+Example:
+UnaryOperator<Integer> square = x -> x*x;
+
+BinaryOperator:
+* Do input
+* Same type output
+Example:
+BinaryOperator<Integer> sum = (a,b) -> a+b;
+
+**Method and Constructor References**
+Lambda ka short version hota hai.
+Syntax:
+ClassName::methodName
+Example:
+list.forEach(System.out::println);
+Constructor Reference:
+ClassName::new
+
+**Java Streams (Stream API)**
+Stream collection data ko process karne ke liye use hota hai.
+Features:
+* filter
+* map
+* reduce
+* sorted
+Example:
+list.stream()
+.filter(x -> x>5)
+.forEach(System.out::println);
+
+**Java 8 Date and Time API**
+Old Date class ko replace karne ke liye new API aayi.
+Main classes:
+* LocalDate
+* LocalTime
+* LocalDateTime
+Example:
+LocalDate today = LocalDate.now();
+
+**Optional Class**
+NullPointerException avoid karne ke liye use hoti hai.
+Example:
+Optional<String> name = Optional.of("Satyam");
+name.ifPresent(System.out::println);
